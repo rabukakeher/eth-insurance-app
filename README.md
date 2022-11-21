@@ -1,2 +1,2 @@
 # eth-insurance-app
-A project on etherium blockchain for insurance handling.
+A project on Ethereum Blockchain for insurance handling.
