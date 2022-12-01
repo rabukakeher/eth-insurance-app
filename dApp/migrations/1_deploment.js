@@ -14,7 +14,7 @@ module.exports = (deployer) => {
     // Deploy the contract to the network
     deployer.deploy(CustomToken, 'RabuToken', 500).then((customToken) => {
         return deployer.deploy(Onboarding).then((onboarding) => {
-            return deployer.deploy(PremiumCollector).then((premiumCollector) => {
+            return deployer.deploy(PremiumCollector, customToken.address).then((premiumCollector) => {
                 return deployer.deploy(ClaimManager).then((claimManager) => {
                     return deployer.deploy(InsuranceManager, onboarding.address, claimManager.address, premiumCollector.address);
                 });

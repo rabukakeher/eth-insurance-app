@@ -16,9 +16,18 @@ contract InsuranceManager {
         claimManager = ClaimManager(claimManagerAddr);
         premiumCollector = PremiumCollector(premiumCollectorAddr);
     }
-    
-    function onboardUser(address userAddress, uint amountInsured) public returns (Onboarding.Policy memory policy) {
-        return onboarding.onboardUser(userAddress, amountInsured);
+
+    event UserPolicy (
+        address userAddress,
+        string policyName,
+        uint amountInsured,
+        uint amountDueEveryMonth
+    );
+
+    function onboardUser(address userAddress, uint amountInsured) external {
+         Onboarding.Policy memory policy = onboarding.onboardUser(userAddress, amountInsured);
+
+         emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
     }
 
     function payPremium(address userAddress, uint amount) public {
@@ -28,5 +37,4 @@ contract InsuranceManager {
     function requestClaim(address userAddress, uint amountClaimed) public {
         claimManager.requestClaim(userAddress, amountClaimed);
     }
-
 }
