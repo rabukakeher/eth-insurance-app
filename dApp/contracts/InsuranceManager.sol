@@ -30,6 +30,12 @@ contract InsuranceManager {
          emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
     }
 
+    function getUserPolicy(address userAddress) external {
+        Onboarding.Policy memory policy = onboarding.gerUserPolicy(userAddress);
+
+        emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
+    }
+
     function payPremium(address userAddress, uint amount) public {
         premiumCollector.pay(userAddress, amount);
     }

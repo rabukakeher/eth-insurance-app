@@ -24,7 +24,6 @@ contract("CustomToken", (accounts) => {
 
     it('check onboarding', async () => {
         console.log("onboarding: ", onboarding.address);
-        
     })
 
     it('check premiumCollector', async () => {
@@ -38,10 +37,16 @@ contract("CustomToken", (accounts) => {
     it('check InsuranceManager', async () => {
         console.log("Insurance Manager: " ,insuranceManager.address)
 
-        await insuranceManager.onboardUser("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194", 50).then((policy) => {
-            console.log("User Onboarded: \n", policy.logs[0].args);
-        })
+        let policyOnboarded = await insuranceManager.onboardUser("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194", 50);
+        let policyRetrieved = await insuranceManager.getUserPolicy("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194");
 
+        policyOnboarded = policyOnboarded.logs[0].args;
+        policyRetrieved = policyRetrieved.logs[0].args;
+
+        console.log("Policy on boardning: \n", policyOnboarded);
+        console.log("Policy on retreival: \n", policyRetrieved);
+
+        assert(policyOnboarded, policyRetrieved);
     })
 
 })
