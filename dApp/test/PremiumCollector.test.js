@@ -16,4 +16,4 @@ contract("PremiumCollector", (accounts) => {
         assert.equal(balance_old - balance_new, 10)
     })
 
-})
+}) 
