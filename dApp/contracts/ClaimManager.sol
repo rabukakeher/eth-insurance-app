@@ -38,4 +38,8 @@ contract ClaimManager {
         claims[userAddress] = claimRequest;
     }
 
+    function getClaim(address userAddress) public view returns (ClaimRequest memory claimRequest){
+        claimRequest = claims[userAddress];
+    }
+
 }
