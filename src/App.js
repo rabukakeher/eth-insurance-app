@@ -3,6 +3,8 @@ import './App.css';
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Onboarding from "./pages/Onboarding";
+import ClaimRequest from "./pages/ClaimRequest";
+import Payment from "./pages/Payment";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -12,8 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Onboarding} />
         <Route path="/onboarding" component={Onboarding} />
-        <Route path="/claim-request" component={Onboarding} />
-        <Route path="/payment" component={Onboarding} />
+        <Route path="/claim-request" component={ClaimRequest} />
+        <Route path="/payment" component={Payment} />
       </Switch>
     </Router>
   );
