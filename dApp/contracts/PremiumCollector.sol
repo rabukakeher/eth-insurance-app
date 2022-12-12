@@ -10,12 +10,11 @@ contract PremiumCollector {
     constructor (address customTokenAddr) {
         customToken = CustomToken(customTokenAddr);
     }
-    
-    function pay(address userAddress, uint amount) public {
-        //transfer from company's account into the user's account
 
+    // transfer token/ monthly payment from the user's account into company's account
+    function pay(address userAddress, uint amount) public {
         address from = userAddress;
-        address to = msg.sender;//company address here
+        address to = msg.sender; // company address here
         customToken.transferFrom(from, to, amount);
     }
 }

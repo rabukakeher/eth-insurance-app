@@ -24,23 +24,26 @@ contract InsuranceManager {
         uint amountDueEveryMonth
     );
 
-    function onboardUser(address userAddress, uint amountInsured) external {
-         Onboarding.Policy memory policy = onboarding.onboardUser(userAddress, amountInsured);
-
-         emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
+    function requestClaim(address userAddress, uint amountClaimed) public {
+        claimManager.requestClaim(userAddress, amountClaimed);
     }
 
-    function getUserPolicy(address userAddress) external {
+    function onboardUser(address userAddress, uint amountInsured) external {
+        bool isApproved = claimManager.claims[userAddress];
+        require(isApproved == true);
+        Onboarding.Policy memory policy = onboarding.onboardUser(userAddress, amountInsured);
+
+        emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
+    }
+
+    function getUserPolicy(address userAddress) public returns (Policy memory policy) {
         Onboarding.Policy memory policy = onboarding.gerUserPolicy(userAddress);
+        return policy;
 
         emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
     }
 
     function payPremium(address userAddress, uint amount) public {
         premiumCollector.pay(userAddress, amount);
-    }
-
-    function requestClaim(address userAddress, uint amountClaimed) public {
-        claimManager.requestClaim(userAddress, amountClaimed);
     }
 }

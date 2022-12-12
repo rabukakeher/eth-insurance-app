@@ -12,8 +12,8 @@ contract Onboarding {
         uint amountDueEveryMonth;
     }
 
-    // Every user pays a premium of 20 percent of the amount he ensures for one year
-    function onboardUser(address userAddress, uint amountInsured) public returns (Policy memory policy){
+    // Every user pays a premium of 20 percent of the amount he/she insures for one year
+    function onboardUser(address userAddress, uint amountInsured) public returns (Policy memory policy) {
         uint premium = (amountInsured * 2) / 10;
         uint amountDuePerMonth = premium / 12;
         if(amountDuePerMonth < 1) {

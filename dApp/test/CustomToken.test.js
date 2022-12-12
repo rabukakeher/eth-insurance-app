@@ -3,9 +3,10 @@ const Onboarding = artifacts.require("Onboarding");
 const PremiumCollector = artifacts.require("PremiumCollector");
 const ClaimManager = artifacts.require("ClaimManager");
 const InsuranceManager = artifacts.require("InsuranceManager");
+const userAddress = "0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194";
 
 
-// all the hardcoded addres chaould change based on the address on the local bloackchain where the tests are run
+// all the hardcoded address could change based on the address on the local blockchain where the tests are run
 contract("CustomToken", (accounts) => {
     before(async () => {
         customToken = await CustomToken.deployed()
@@ -15,10 +16,14 @@ contract("CustomToken", (accounts) => {
         insuranceManager = await InsuranceManager.deployed()
     })
 
+// do we need call CustomToken's constructor??
+//    it('the token\'s initial supply', async() => {
+//    })
+
     it('check start balance of token', async () => {
-        await customToken.transfer("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194", 50)
+        await customToken.transfer(userAddress, 50)
         await customToken.transfer(customToken.address, 50)
-        let balance = await customToken.balanceOf("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194")
+        let balance = await customToken.balanceOf(userAddress)
         assert.equal(balance, 50, 'The initial supply should be 50')
     })
 
@@ -27,7 +32,7 @@ contract("CustomToken", (accounts) => {
     })
 
     it('check premiumCollector', async () => {
-        console.log("Premium Collector: " ,premiumCollector.address)
+        console.log("Premium Collector: ", premiumCollector.address)
     })
 
     it('check ClaimManager', async () => {
@@ -35,7 +40,7 @@ contract("CustomToken", (accounts) => {
     })
 
     it('check InsuranceManager', async () => {
-        console.log("Insurance Manager: " ,insuranceManager.address)
+        console.log("Insurance Manager: ", insuranceManager.address)
 
         let policyOnboarded = await insuranceManager.onboardUser("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194", 50);
         let policyRetrieved = await insuranceManager.getUserPolicy("0xf3f2216eD7d42E7e0D88874F59f8763bFAe3b194");
@@ -43,10 +48,10 @@ contract("CustomToken", (accounts) => {
         policyOnboarded = policyOnboarded.logs[0].args;
         policyRetrieved = policyRetrieved.logs[0].args;
 
-        console.log("Policy on boardning: \n", policyOnboarded);
-        console.log("Policy on retreival: \n", policyRetrieved);
+        console.log("Policy on boarding: \n", policyOnboarded);
+        console.log("Policy on retrieval: \n", policyRetrieved);
 
-        assert(policyOnboarded, policyRetrieved);
+        assert.equal(policyOnboarded, policyRetrieved);
     })
 
 })
