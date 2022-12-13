@@ -1,27 +1,45 @@
 import React from "react";
 import {FormGroup, FormControl, Input, InputLabel, TextField, Box, Button} from "@material-ui/core";
-
+import {Grid, Row, Col} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import { useState } from "react";
 
 function ClaimRequest() {
+
+    const [userAddress, setUserAddress] = useState();
+    const [amount, setAmount] = useState(0);
+
+    const handleSubmit = (e) => {
+        console.log("address:", userAddress);
+        console.log("amount :", amount);
+    }
     return (
 
         <div>
-            <h1 align= "center">Onboard User</h1>
-            <Box component= "from" sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+            <h1 align="center">Onboard User</h1>
+            <Box component="form" sx={{
+                '& .MuiTextField-root': {m: 1, width: '25ch'},
             }}
                  noValidate
                  autoComplete="off">
-                <div class = "row">
-                    <div className="col">
-                        <h2> UserAddress:</h2><TextField id="userAddress" label="User Address" variant="outlined" />
-                    </div>
-                    <h2> Amount:</h2><TextField id="amount" label="Amount" variant="outlined" />
+                <Container>
+                    <Row className="show-grid">
 
-                    <Button variant="contained">Claim Request</Button>
+                        <Col>
+                            <h2 align="center"> UserAddress:<TextField value={userAddress} id="userAddress"
+                                                                       label="User Address" variant="outlined"/></h2>
+                        </Col>
+                        <Col>
+                            <h2 align="center"> Amount:<TextField value={amount} id="amount" label="Amount"
+                                                                  variant="outlined"/></h2>
+                        </Col>
+
+                        <Col align="center"><Button variant="contained" onClick={handleSubmit}>Claim
+                            Request</Button></Col>
 
 
-                </div>
+                    </Row>
+                </Container>
             </Box>
         </div>
     );
