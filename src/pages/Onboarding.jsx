@@ -1,6 +1,6 @@
 import React from "react";
 import {TextField, Box, Button} from "@material-ui/core";
-import {Row, Col} from 'react-bootstrap';
+import {Grid} from '@material-ui/core';
 import Container from 'react-bootstrap/Container';
 import { useState } from "react";
 import {onBoardUser, getUserPolicy} from './service';
@@ -20,32 +20,47 @@ function Onboarding() {
     return (
         <div>
             <h1 align="center">Onboard User</h1>
-            <Box component="form" sx={{
-                '& .MuiTextField-root': {m: 1, width: '25ch'},
-            }}
+            <Box component="form"
                  noValidate
                  autoComplete="off">
                 <Container>
-                    <Row className="show-grid">
-                        <Col>
-                            <h2 align="center"> UserAddress:<TextField value={userAddress} id="userAddress"
+                    <Grid container>
+                        <Grid xs={6}>
+                            <h2 align='center'> UserAddress:</h2>
+                            </Grid>
+                            <Grid xs={6}>
+                            <TextField value={userAddress} id="userAddress"
                                                                        label="User Address" variant="outlined"
                                                                        onChange={(e) => setUserAddress(e.target.value)}/>
-                            </h2>
-                        </Col>
-                        <Col>
-                            <h2 align="center"> Amount:<TextField value={amount} id="amount" label="amount"
+                            
+                        </Grid>
+                        </Grid>
+                        <Grid container>
+                        <Grid xs={6}>
+                            <h2 align="center"> Amount:</h2>
+                            </Grid>
+                            <Grid xs={6}>
+                            <TextField value={amount} id="amount" label="amount"
                                                                   variant="outlined"
-                                                                  onChange={(e) => setAmount(e.target.value)}/></h2>
-                        </Col>
-                        <Col align="center">
-                            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                                                                  onChange={(e) => setAmount(e.target.value)}/>
+                        </Grid>
+                        </Grid>
+                        <Grid container>
+                            <Grid xs ={3}>
+
+                            </Grid>
+                        <Grid xs={2}>
+                            <div align='center'>
+                                <Button variant="contained" onClick={handleSubmit} >Submit</Button>
+                            </div>
+                            </Grid>
+                            <Grid xs={2}>
                             <Button variant="outlined" onClick={() => {
                                 setUserAddress("");
                                 setAmount("");
                             }}>Reset</Button>
-                        </Col>
-                    </Row>
+                        </Grid>
+                    </Grid>
                 </Container>
             </Box>
         </div>
