@@ -2,7 +2,7 @@ import React from "react";
 import {FormGroup, FormControl, Input, InputLabel, TextField, Box, Button} from "@material-ui/core";
 import {Grid, Row, Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import { useState } from "react";
+import {useState} from "react";
 
 function ClaimRequest() {
 
@@ -27,11 +27,14 @@ function ClaimRequest() {
 
                         <Col>
                             <h2 align="center"> UserAddress:<TextField value={userAddress} id="userAddress"
-                                                                       label="User Address" variant="outlined"/></h2>
+                                                                       label="User Address" variant="outlined"
+                                                                       onChange={(e) => setUserAddress(e.target.value)}/>
+                            </h2>
                         </Col>
                         <Col>
-                            <h2 align="center"> Amount:<TextField value={amount} id="amount" label="Amount"
-                                                                  variant="outlined"/></h2>
+                            <h2 align="center"> Amount:<TextField value={amount} id="amount" label="amount"
+                                                                  variant="outlined"
+                                                                  onChange={(e) => setAmount(e.target.value)}/></h2>
                         </Col>
 
                         <Col align="center"><Button variant="contained" onClick={handleSubmit}>Claim

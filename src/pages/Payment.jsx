@@ -26,16 +26,21 @@ function Payment() {
                 <Container>
                     <Row className="show-grid">
                         <Col>
-                            <h2 align="center"> UserAddress:<TextField id="userAddress" label="User Address"
-                                                                       variant="outlined"/></h2>
+                            <h2 align="center"> UserAddress:<TextField value={userAddress} id="userAddress"
+                                                                       label="User Address" variant="outlined"
+                                                                       onChange={(e) => setUserAddress(e.target.value)}/>
+                            </h2>
                         </Col>
                         <h2 align="center"> Policy Details:</h2>
-                        <h2 align="center"> Amount Due:<TextField id="amount" label="User amount due"
-                                                                  variant="outlined"/></h2>
-
+                        <h2 align="center"> Amount:<TextField value={amount} id="amount" label="amount"
+                                                              variant="outlined"
+                                                              onChange={(e) => setAmount(e.target.value)}/></h2>
                         <Col align="center">
-                            <Button variant="contained">Submit</Button>
-                            <Button variant="outlined">Reset</Button>
+                            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                            <Button variant="outlined" onClick={() => {
+                                setUserAddress("");
+                                setAmount("");
+                            }}>Reset</Button>
                         </Col>
 
                     </Row>
