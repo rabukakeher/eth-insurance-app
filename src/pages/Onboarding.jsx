@@ -1,5 +1,5 @@
 import React from "react";
-import {FormGroup, FormControl, Input, InputLabel, TextField, Box, Button} from "@material-ui/core";
+import {TextField, Box, Button} from "@material-ui/core";
 import { useState } from "react";
 
 
@@ -22,12 +22,12 @@ function Onboarding() {
             autoComplete="off">
                 <div className = "row">
                     <div className="col">
-                <h2> UserAddress:</h2><TextField id="userAddress" label="User Address" variant="outlined" onChange={(e) =>  setUserAddress(e.target.value) }/>
+                <h2> UserAddress:</h2><TextField value={userAddress} id="userAddress" label="User Address" variant="outlined" onChange={(e) =>  setUserAddress(e.target.value) }/>
                     </div>
-                <h2> Amount:</h2><TextField id="amount" label="User Address" variant="outlined" onChange={(e) =>  setAmount(e.target.value)}/>
+                <h2> Amount:</h2><TextField value={amount} id="amount" label="User Address" variant="outlined" onChange={(e) =>  setAmount(e.target.value)}/>
 
                 <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-                <Button variant="outlined">Reset</Button>
+                <Button variant="outlined"onClick={() => {setUserAddress(""); setAmount("");}}>Reset</Button>
 
                 </div>
         </Box>
