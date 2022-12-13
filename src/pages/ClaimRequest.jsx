@@ -1,8 +1,11 @@
 import React from "react";
 import {FormGroup, FormControl, Input, InputLabel, TextField, Box, Button} from "@material-ui/core";
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import {useState} from "react";
+import {Grid} from '@material-ui/core';
+import {requestClaim} from './service';
+
 
 function ClaimRequest() {
 
@@ -10,42 +13,63 @@ function ClaimRequest() {
     const [amount, setAmount] = useState(0);
 
     const handleSubmit = (e) => {
-        console.log("address:", userAddress);
-        console.log("amount :", amount);
+        requestClaim(userAddress, amount).then((address, claimAmount) => {
+            console.log("User Address:", address);
+            console.log("Amount for claim:", claimAmount);
+        });
     }
     return (
 
         <div>
             <h1 align="center">Onboard User</h1>
-            <Box component="form" sx={{
-                '& .MuiTextField-root': {m: 1, width: '25ch'},
-            }}
-                 noValidate
-                 autoComplete="off">
+            <Box component="form"
+                noValidate
+                autoComplete="off">
                 <Container>
-                    <Row className="show-grid">
+                    <Grid container>
 
-                        <Col>
-                            <h2 align="center"> UserAddress:<TextField value={userAddress} id="userAddress"
-                                                                       label="User Address" variant="outlined"
-                                                                       onChange={(e) => setUserAddress(e.target.value)}/>
-                            </h2>
-                        </Col>
-                        <Col>
-                            <h2 align="center"> Amount:<TextField value={amount} id="amount" label="amount"
-                                                                  variant="outlined"
-                                                                  onChange={(e) => setAmount(e.target.value)}/></h2>
-                        </Col>
-
-                        <Col align="center"><Button variant="contained" onClick={handleSubmit}>Claim
-                            Request</Button></Col>
+                        <Grid xs={5}>
+                            <h2 align="center"> UserAddress:</h2>
+                        </Grid>
+                        <Grid xs={5}>
+                            <TextField value={userAddress} id="userAddress"
+                                       label="User Address" variant="outlined"
+                                       onChange={(e) => setUserAddress(e.target.value)}/>
 
 
-                    </Row>
-                </Container>
-            </Box>
-        </div>
-    );
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                    <Grid xs={5}>
+                        <h2 align="center"> Amount:</h2>
+                    </Grid>
+
+                    <Grid xs={5}>
+                        <TextField value={amount} id="amount" label="amount"
+                                   variant="outlined"
+                                   onChange={(e) => setAmount(e.target.value)}/>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid xs={3}>
+
+                    </Grid>
+                    <Grid xs={2}>
+                        <div align="center"><Button variant="contained" onClick={handleSubmit}>Claim
+                            Request</Button></div>
+                    </Grid>
+                    <Grid xs={2}>
+                        <Button variant="outlined" onClick={() => {
+                            setUserAddress("");
+                            setAmount("");
+                        }}>Reset</Button>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
+</div>
+)
+    ;
 }
 
 export default ClaimRequest;
