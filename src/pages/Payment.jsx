@@ -28,7 +28,7 @@ function Payment() {
                     <Grid container>
                         <Grid xs={5}>
                             <h2 align="center"> UserAddress:</h2>
-
+                        </Grid>
                             <Grid xs={5}>
                                 <TextField value={userAddress} id="userAddress"
                                            label="User Address" variant="outlined"
@@ -60,9 +60,7 @@ function Payment() {
                                     }}>Reset</Button>
                                 </Grid>
                             </Grid>
-
                         </Grid>
-                    </Grid>
                 </Container>
             </Box>
         </div>

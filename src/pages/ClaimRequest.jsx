@@ -4,7 +4,7 @@ import {Row, Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import {useState} from "react";
 import {Grid} from '@material-ui/core';
-import {requestClaim} from './service';
+import {requestClaim, getClaimStatus} from './service';
 
 
 function ClaimRequest() {
@@ -13,15 +13,19 @@ function ClaimRequest() {
     const [amount, setAmount] = useState(0);
 
     const handleSubmit = (e) => {
-        requestClaim(userAddress, amount).then((address, claimAmount) => {
-            console.log("User Address:", address);
-            console.log("Amount for claim:", claimAmount);
+        requestClaim(userAddress, amount).then((result) => {
+            console.log("User Address:", result);
+            getClaimStatus(userAddress).then((claimResult) =>{
+                console.log("claim result:", claimResult);
+            });
+
+            //console.log("Amount for claim:", claimAmount);
         });
     }
     return (
 
         <div>
-            <h1 align="center">Onboard User</h1>
+            <h1 align="center">Claim Request</h1>
             <Box component="form"
                 noValidate
                 autoComplete="off">
