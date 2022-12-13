@@ -32,14 +32,12 @@ contract InsuranceManager {
         string comment
     );
 
-    function onboardUser(address userAddress, uint amountInsured) external {
-         Onboarding.Policy memory policy = onboarding.onboardUser(userAddress, amountInsured);
-         emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
+    function onboardUser(address userAddress, uint amountInsured) external returns (Onboarding.Policy memory policy) {
+         policy = onboarding.onboardUser(userAddress, amountInsured);
     }
 
-    function getUserPolicy(address userAddress) external {
-        Onboarding.Policy memory policy = onboarding.gerUserPolicy(userAddress);
-        emit UserPolicy(userAddress, policy.name, policy.amountInsured, policy.amountDueEveryMonth);
+    function getUserPolicy(address userAddress) external view returns (Onboarding.Policy memory policy)  {
+        policy = onboarding.gerUserPolicy(userAddress);
     }
 
     function payPremium(address userAddress, uint amount) external {
@@ -58,8 +56,7 @@ contract InsuranceManager {
         claimManager.declineClaimRequest(userAddress, reason);
     }
 
-    function getClaimStatus(address userAddress) external {
-        ClaimManager.ClaimRequest memory claimRequest = claimManager.getClaim(userAddress);
-        emit ClaimRequest(claimRequest.userAddress, claimRequest.amountClaimed, claimRequest.amountApproved, claimRequest.isApproved, claimRequest.comment);
+    function getClaimStatus(address userAddress) external view returns (ClaimManager.ClaimRequest memory claimRequest) {
+        claimRequest = claimManager.getClaim(userAddress);
     }
 }

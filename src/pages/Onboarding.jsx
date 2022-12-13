@@ -1,16 +1,20 @@
 import React from "react";
-import {FormGroup, FormControl, Input, InputLabel, TextField, Box, Button} from "@material-ui/core";
-import {Grid, Row, Col} from 'react-bootstrap';
+import {TextField, Box, Button} from "@material-ui/core";
+import {Row, Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { useState } from "react";
-
+import {onBoardUser, getUserPolicy} from './service';
+ 
 function Onboarding() {
     const [userAddress, setUserAddress] = useState();
     const [amount, setAmount] = useState(0);
 
     const handleSubmit = (e) => {
-        console.log("address - ", userAddress);
-        console.log("amount - ", amount);
+        onBoardUser(userAddress, amount).then( (result) => {
+            getUserPolicy(userAddress).then((userPolicy) => {
+                console.log("User Policy - ", userPolicy);
+            });
+        });
     }
 
     return (
