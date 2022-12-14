@@ -5,22 +5,26 @@ import Container from 'react-bootstrap/Container';
 import { useState } from "react";
 import {getClaimStatus, approveClaimRequest,declineClaimRequest} from './service';
 
+
 function Admin() {
     const [userAddress, setUserAddress] = useState();
     const [amount, setAmount] = useState(0);
+    const [policyDetails, setPolicyDetails] = useState("");
 
     const ApproveSubmit = (e) => {
         getClaimStatus(userAddress).then( (result) => {
             approveClaimRequest(userAddress).then((userPolicy) => {
                 console.log("User Policy - ", userPolicy);
+                alert("Claim Approved!"+"\n\n"+"User address = " + result.userAddress + "\n" +"amount claimed:"+ result.amountClaimed+"\n"+"amount Approved:"+result.amountApproved+"\n"+"comment:"+result.comment);
             });
         });
     }
     const RejectSubmit = (e) => {
         getClaimStatus(userAddress).then( (result) => {
             //TODO: passed reason as declined
-            declineClaimRequest(userAddress,"Declined").then((userPolicy) => {
+            declineClaimRequest(userAddress,"Not Enough Information").then((userPolicy) => {
                 console.log("User Policy - ", userPolicy);
+                alert("Claim Rejected!"+"\n\n"+"User address = " + result.userAddress + "\n" +"amount claimed:"+ result.amountClaimed+"\n"+"amount Approved:"+result.amountApproved+"\n"+"comment:"+result.comment);
             });
         });
     }
@@ -28,6 +32,8 @@ function Admin() {
         getClaimStatus(userAddress).then( (result) => {
             //TODO: passed reason as declined
                 console.log("User Policy - ", result);
+                result = "User address = " + result.userAddress + "\n" +"amount claimed:"+ result.amountClaimed+"\n"+"amount Approved:"+result.amountApproved+"\n"+"comment:"+result.comment;
+                setPolicyDetails(result);
         });
     }
 
@@ -56,20 +62,23 @@ function Admin() {
                     </Grid>
                     <Grid container>
                         <Grid xs={6}>
-                            <h2 align="center"> Policy Details:</h2>
+                            <h2 align="center"> Claim Details:</h2>
                         </Grid>
                         <Grid xs={6}>
-
+                            <TextField
+                                id="policydetails"
+                                multiline
+                                maxRows={6}
+                                fullWidth
+                                variant="filled"
+                                value ={policyDetails}
+                                rows ={5}
+                                cols ={20}
+                            />
                         </Grid>
                     </Grid>
                     <Grid container>
-                        <Grid xs={6}>
-                            <h2 align="center"> Amount:</h2>
-                        </Grid>
-                        <Grid xs={6}>
-                            <TextField value={amount} id="amount" label="amount"
-                                       variant="outlined"
-                                       onChange={(e) => setAmount(e.target.value)}/>
+                        <Grid xs ={3}>
                         </Grid>
                     </Grid>
                     <Grid container>
