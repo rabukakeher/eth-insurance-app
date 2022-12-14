@@ -22,7 +22,7 @@ function Admin() {
     const RejectSubmit = (e) => {
         getClaimStatus(userAddress).then( (result) => {
             //TODO: passed reason as declined
-            declineClaimRequest(userAddress,"Not Enough Information").then((userPolicy) => {
+            declineClaimRequest(userAddress,"REJECTED!!--Not Enough Information").then((userPolicy) => {
                 console.log("User Policy - ", userPolicy);
                 alert("Claim Rejected!"+"\n\n"+"User address = " + result.userAddress + "\n" +"amount claimed:"+ result.amountClaimed+"\n"+"amount Approved:"+result.amountApproved+"\n"+"comment:"+result.comment);
             });
@@ -39,7 +39,7 @@ function Admin() {
 
     return (
         <div>
-            <h1 align="center">Claim Approval</h1>
+            <h1 align="center">Admin</h1>
             <Box component="form"
                  noValidate
                  autoComplete="off">
