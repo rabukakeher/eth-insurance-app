@@ -35,7 +35,11 @@ const requestClaim = async (userAddress,  amountClaimed) => {
     const id = await web3.eth.net.getId();
     const deployedNetwork = InsuranceManager.networks[id];
     const contract = new web3.eth.Contract(InsuranceManager.abi, deployedNetwork.address);
-    return contract.methods.requestClaim(userAddress, amountClaimed).call();
+    const addresses = await web3.eth.getAccounts();
+    return contract.methods.requestClaim(userAddress, amountClaimed).send({
+        from: addresses[2],
+        gas: 100000
+    });
 }
 
 const approveClaimRequest = async (userAddress) => {

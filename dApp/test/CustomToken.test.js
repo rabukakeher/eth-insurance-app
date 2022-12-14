@@ -43,11 +43,11 @@ contract("CustomToken", (accounts) => {
 
         insuranceManager.payPremium(testUserAddress, 5);
 
-        policyOnboarded = policyOnboarded.logs[0].args;
-        policyRetrieved = policyRetrieved.logs[0].args;
+        //policyOnboarded = policyOnboarded.logs[0].args;
+        //policyRetrieved = policyRetrieved.logs[0].args;
 
-        //console.log("Policy on boardning: \n", policyOnboarded);
-        //console.log("Policy on retreival: \n", policyRetrieved);
+        console.log("Policy on boardning: \n", policyOnboarded);
+        console.log("Policy on retreival: \n", policyRetrieved);
 
         assert(policyOnboarded, policyRetrieved);
     })
@@ -59,8 +59,8 @@ contract("CustomToken", (accounts) => {
 
         insuranceManager.payPremium(testUserAddress, 5);
 
-        policyOnboarded = policyOnboarded.logs[0].args;
-        policyRetrieved = policyRetrieved.logs[0].args;
+        //policyOnboarded = policyOnboarded.logs[0].args;
+        //policyRetrieved = policyRetrieved.logs[0].args;
 
         //console.log("Policy on boardning: \n", policyOnboarded);
         //console.log("Policy on retreival: \n", policyRetrieved);
@@ -69,12 +69,12 @@ contract("CustomToken", (accounts) => {
         await insuranceManager.requestClaim(testUserAddress, 40);
         let claimRequest = await insuranceManager.getClaimStatus(testUserAddress);
 
-        console.log("Claim Status before status update : \n", claimRequest.logs[0].args);
+        console.log("Claim Status before status update : \n", claimRequest);
 
         await insuranceManager.approveClaimRequest(testUserAddress);
 
         claimRequest = await insuranceManager.getClaimStatus(testUserAddress);
-        console.log("Claim Status after status update : \n", claimRequest.logs[0].args);
+        console.log("Claim Status after status update : \n", claimRequest);
 
     })
 

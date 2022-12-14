@@ -48,7 +48,7 @@ function Admin() {
                                        onChange={(e) => setUserAddress(e.target.value)}/>
 
                         </Grid>
-                        <Grid xs={12}>
+                        <Grid xs={10}>
                             <div align="center">
                             <Button variant="contained" onClick={PolicyDetails} >Policy Details</Button>
                             </div>
@@ -74,11 +74,15 @@ function Admin() {
                     </Grid>
                     <Grid container>
                         <Grid xs ={3}>
+                        </Grid>
+                        <Grid xs={1}>
+                            <div align='center'>
+                                <Button variant="contained" onClick={ApproveSubmit} >Approve</Button>
 
+                            </div>
                         </Grid>
                         <Grid xs={2}>
                             <div align='center'>
-                                <Button variant="contained" onClick={ApproveSubmit} >Approve</Button>
 
                                 <Button variant="contained" onClick={RejectSubmit} >Reject</Button>
                             </div>

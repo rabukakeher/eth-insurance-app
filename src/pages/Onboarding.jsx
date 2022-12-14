@@ -13,9 +13,15 @@ function Onboarding() {
         onBoardUser(userAddress, amount).then( (result) => {
             getUserPolicy(userAddress).then((userPolicy) => {
                 console.log("User Policy - ", userPolicy);
-                alert("User policy: "+userPolicy[0]+"\n"+ "user Address: "+userAddress+"\n"+"amount Insured: "+userPolicy[1]+"\n"+"amount Due Every month: "+userPolicy[2]);
+                alert("User Onboarderd! \n\nUser policy: "+userPolicy[0]+"\n"+ "user Address: "+userAddress+"\n"+"amount Insured: "+userPolicy[1]+"\n"+"amount Due Every month: "+userPolicy[2]);
+                resetValues();
             });
         });
+    }
+
+    const resetValues = () => {
+            setUserAddress("");
+            setAmount("");
     }
 
     return (
@@ -56,10 +62,7 @@ function Onboarding() {
                             </div>
                             </Grid>
                             <Grid xs={2}>
-                            <Button variant="outlined" onClick={() => {
-                                setUserAddress("");
-                                setAmount("");
-                            }}>Reset</Button>
+                            <Button variant="outlined" onClick={(e) => resetValues()}>Reset</Button>
                         </Grid>
                     </Grid>
                 </Container>
