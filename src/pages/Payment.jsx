@@ -4,16 +4,22 @@ import {Row, Col} from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import {useState} from "react";
 import {Grid} from '@material-ui/core';
-import {payPremium} from './service';
+import {payPremium,getUserPolicy} from './service';
 
 function Payment() {
 
     const [userAddress, setUserAddress] = useState();
     const [amount, setAmount] = useState(0);
+    const [policyDetails] = useState();
 
     const handleSubmit = (e) => {
         payPremium(userAddress, amount).then((result) => {
             console.log("User Policy - ", result);
+        });
+    }
+    const GetPolicySubmit = (e) => {
+        getUserPolicy(userAddress).then((policyDate) => {
+
         });
     }
 
@@ -34,11 +40,18 @@ function Payment() {
                                            label="User Address" variant="outlined"
                                            onChange={(e) => setUserAddress(e.target.value)}/>
                             </Grid>
+                        <Grid xs={10}>
+                            <div align="center">
+                                <Button variant="contained" onClick={GetPolicySubmit}>Get Policy details</Button>
+                            </div>
+                        </Grid>
                         </Grid>
                         <Grid container>
                             <Grid xs={5}>
-                                <h2 align="center"> Policy Details:</h2>
+                                <h2 align="center"> Policy Details:</h2> <h3>{policyDetails}</h3>
                             </Grid>
+                        </Grid>
+                    <Grid container>
                             <Grid xs={5}>
                                 <h2 align="center"> Amount:</h2>
                             </Grid>
@@ -49,16 +62,17 @@ function Payment() {
 
                         </Grid>
                         <Grid container>
-                            <Grid xs={3}>
+                            <Grid xs={10}>
                                 <div align="center">
                                     <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-                                </div>
-                                <Grid xs={2}>
+
+
                                     <Button variant="outlined" onClick={() => {
                                         setUserAddress("");
                                         setAmount("");
                                     }}>Reset</Button>
-                                </Grid>
+
+                                </div>
                             </Grid>
                         </Grid>
                 </Container>

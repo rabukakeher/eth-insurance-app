@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Onboarding from "./pages/Onboarding";
 import ClaimRequest from "./pages/ClaimRequest";
 import Payment from "./pages/Payment";
+import Admin from "./pages/Admin";
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/onboarding" component={Onboarding} />
         <Route path="/claim-request" component={ClaimRequest} />
         <Route path="/payment" component={Payment} />
+          <Route path="/admin" component={Admin} />
       </Switch>
     </Router>
   );

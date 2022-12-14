@@ -4,7 +4,7 @@ import {Grid} from '@material-ui/core';
 import Container from 'react-bootstrap/Container';
 import { useState } from "react";
 import {onBoardUser, getUserPolicy} from './service';
- 
+
 function Onboarding() {
     const [userAddress, setUserAddress] = useState();
     const [amount, setAmount] = useState(0);
@@ -13,6 +13,7 @@ function Onboarding() {
         onBoardUser(userAddress, amount).then( (result) => {
             getUserPolicy(userAddress).then((userPolicy) => {
                 console.log("User Policy - ", userPolicy);
+                alert("User policy: "+userPolicy[0]+"\n"+ "user Address: "+userAddress+"\n"+"amount Insured: "+userPolicy[1]+"\n"+"amount Due Every month: "+userPolicy[2]);
             });
         });
     }

@@ -17,6 +17,7 @@ function ClaimRequest() {
             console.log("User Address:", result);
             getClaimStatus(userAddress).then((claimResult) =>{
                 console.log("claim result:", claimResult);
+                alert("User Address: "+claimResult[0]+"\n"+ "Amount Claimed: "+claimResult[1]+"\n"+"Claim status: " +claimResult[3]+"\n"+"Amount Approved: "+claimResult[2]+"\n"+"Comments: "+claimResult[4]);
             });
 
             //console.log("Amount for claim:", claimAmount);

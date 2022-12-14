@@ -54,6 +54,9 @@ function Navbar() {
             <Link to="/claim-request" className={classes.link}>
               Claims
             </Link>
+            <Link to="/admin" className={classes.link}>
+              Admin
+            </Link>
 
           </div>
         
