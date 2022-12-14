@@ -24,6 +24,12 @@ function Admin() {
             });
         });
     }
+    const PolicyDetails = (e) => {
+        getClaimStatus(userAddress).then( (result) => {
+            //TODO: passed reason as declined
+                console.log("User Policy - ", result);
+        });
+    }
 
     return (
         <div>
@@ -42,9 +48,10 @@ function Admin() {
                                        onChange={(e) => setUserAddress(e.target.value)}/>
 
                         </Grid>
-                        <Grid xs={5}>
-
-
+                        <Grid xs={12}>
+                            <div align="center">
+                            <Button variant="contained" onClick={PolicyDetails} >Policy Details</Button>
+                            </div>
                         </Grid>
                     </Grid>
                     <Grid container>
